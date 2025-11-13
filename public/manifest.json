@@ -1,0 +1,10 @@
+{
+  "short_name": "React App",
+  "name": "Kronos | Reproductor Musical",
+  "icons": [
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#09f",
+  "background_color": "#ffffff"
+}
