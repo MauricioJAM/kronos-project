@@ -21,7 +21,6 @@ article {
         display: flex;
         align-items: center;
         width: 100%;
-        justify-content: space-between;
         gap: 0.5em;
         box-sizing: border-box;
 
@@ -30,7 +29,7 @@ article {
             gap: 0.5em;
         }
 
-        h3 {
+        .song-link {
             color: #F0DB4F;
             font-size: 1em;
             margin-left: 1em;
@@ -39,6 +38,8 @@ article {
             white-space: nowrap;
             text-overflow: ellipsis;
             flex: 1;
+            text-decoration: none;
+            display: inline-block;
 
 
 
@@ -46,10 +47,11 @@ article {
                 font-size: 1em;
                 padding-right: 1em;
                 max-width: 100px;
+
             }
 
-
         }
+
 
         i {
             color: #888;

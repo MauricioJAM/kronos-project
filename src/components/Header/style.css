@@ -1,4 +1,4 @@
-header{
+header {
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -18,11 +18,12 @@ header nav {
     background-color: #333;
     border: 1px solid #F0DB4F;
     padding: 0.5em;
-
+    display: flex;
+    justify-content: center;
 
     ul {
         width: fit-content;
-        margin: 0 auto;
+
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -45,15 +46,36 @@ header nav {
 
         }
 
+    }
+
+    form {
+        align-self: center;
+        padding-left: 1.5em;
+
         input {
             border-radius: 25px;
-            padding-left: 0.5em;
-            margin: 0.5em 0;
+            padding: 0.5em 1em;
+            margin: 0.5em auto;
             min-width: 150px;
+
 
             @media (max-width: 722px) {
                 width: 80%;
                 margin: 0.5em auto;
+            }
+
+        }
+
+        button {
+            border-radius: 10px;
+            background-color: #F0DB4F;
+            margin-left: 0.5em;
+            border-color: #F0DB4F;
+            transition: transform 0.2s ease-in-out;
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(1.05);
             }
         }
     }
