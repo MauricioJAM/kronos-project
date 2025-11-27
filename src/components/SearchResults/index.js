@@ -1,10 +1,10 @@
 import Song from '../Song';
-import './style.css'
+import { Results } from './styles';
 
 const SearchResults = ({songs,loading,error, addToLibrary, onRetry}) =>{
     
     return(
-        <section className='searchResults'>
+        <Results>
         <h2>Songs</h2>
         <div>
             {
@@ -30,7 +30,7 @@ const SearchResults = ({songs,loading,error, addToLibrary, onRetry}) =>{
             }
             
         </div>
-        </section>
+        </Results>
     )
 
 }

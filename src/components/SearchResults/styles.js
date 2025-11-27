@@ -1,5 +1,6 @@
-.searchResults {
+import styled from 'styled-components';
 
+const Results = styled.section`
     width: 55%;
     padding: 2em 4em 1em;
     margin: 0 auto;
@@ -19,4 +20,5 @@
         justify-content: center;
         align-content: center;
     }
-}
+`
+export { Results };

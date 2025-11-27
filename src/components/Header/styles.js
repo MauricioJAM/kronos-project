@@ -1,26 +1,25 @@
-header {
+import styled from 'styled-components';
+
+const HeaderContainer = styled.header`
     font-family: 'Courier New', Courier, monospace;
-}
+    h1{
+        font-size: 4em;
+        text-align: center;
+        font-weight: 600;
+        padding: 0.5em 0;
 
-header h1 {
-    font-size: 4em;
-    text-align: center;
-    font-weight: 600;
-    padding: 0.5em 0;
-
-    @media (max-width: 722px) {
-        font-size: 2.5em;
+        @media (max-width: 722px) {
+            font-size: 2.5em;
+        }
     }
+`
 
-}
-
-header nav {
+const HeaderNav = styled.nav`
     background-color: #333;
-    border: 1px solid #F0DB4F;
+    border: 1px solid ${props => props.theme.colors.primary};
     padding: 0.5em;
     display: flex;
     justify-content: center;
-
     ul {
         width: fit-content;
 
@@ -31,7 +30,7 @@ header nav {
         align-items: center;
 
         li {
-            color: #F0DB4F;
+            color: ${props => props.theme.colors.primary};
             margin: 0.5em 2em;
             cursor: pointer;
             transition: transform 0.2s ease-in-out;
@@ -48,11 +47,11 @@ header nav {
 
     }
 
-    form {
-        align-self: center;
-        padding-left: 1.5em;
-
-        input {
+`
+const SearchForm = styled.form`
+    align-self: center;
+    padding-left: 1.5em;
+    input {
             border-radius: 25px;
             padding: 0.5em 1em;
             margin: 0.5em auto;
@@ -68,9 +67,9 @@ header nav {
 
         button {
             border-radius: 10px;
-            background-color: #F0DB4F;
+            background-color: ${props => props.theme.colors.primary};
             margin-left: 0.5em;
-            border-color: #F0DB4F;
+            border: 1px solid ${props => props.theme.colors.primary};
             transition: transform 0.2s ease-in-out;
             cursor: pointer;
 
@@ -78,6 +77,10 @@ header nav {
                 transform: scale(1.05);
             }
         }
-    }
+`
 
+export{
+    HeaderContainer,
+    HeaderNav,
+    SearchForm
 }

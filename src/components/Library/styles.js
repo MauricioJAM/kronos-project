@@ -1,7 +1,8 @@
-.library {
+import styled from 'styled-components';
+
+const LibrarySection = styled.section`
     position: fixed;
     top: 0;
-    left: -520px;
     width: 500px;
     height: 100vh;
     background-color: #222;
@@ -12,14 +13,12 @@
     z-index: 1000;
     display: flex;
     flex-direction: column;
+    left: ${props => props.library === 'open' ? '0' : '-520px'};
 
     @media(max-width:500px) {
         width: 100%
     }
 
-    &.open {
-        left: 0;
-    }
 
     div:first-child {
         display: flex;
@@ -42,6 +41,6 @@
     div:last-child {
         padding: 0 2em;
     }
+`        
 
-
-}
+export { LibrarySection };

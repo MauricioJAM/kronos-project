@@ -1,4 +1,7 @@
-.song-detail {
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const SongDetailContainer = styled.section`
     position: relative;
     min-height: 60vh;
     display: flex;
@@ -6,18 +9,19 @@
     color: #fff;
     overflow: hidden;
     margin: 2em
-}
+`
 
-
-.song-detail-card {
+const SongDetailCard = styled.div`
     max-width: 800px;
     width: 100%;
     padding: 2rem;
     border-radius: 15px;
     background: no-repeat center/cover;
+   
+`
 
-    .back-link {
-        display: inline-flex;
+const BackLink = styled(Link)`
+     display: inline-flex;
         align-items: center;
         gap: 0.5rem;
 
@@ -30,28 +34,22 @@
 
         border-radius: 8px;
         transition: background 0.2s ease, transform 0.15s ease;
-    }
+        
+        :hover {
+            background: rgba(240, 219, 79, 0.15);
+            transform: translateX(-3px);
+        }
+        :active {
+            transform: translateX(-1px);
+        }
 
-    .back-link:hover {
-        background: rgba(240, 219, 79, 0.15);
-        transform: translateX(-3px);
-    }
-
-    .back-link:active {
-        transform: translateX(-1px);
-    }
-
-    @media (max-width: 768px) {
-        .back-link {
+        @media (max-width: 768px) {
             font-size: 0.9rem;
             padding: 0.3rem 0.6rem;
         }
-    }
+`
 
-}
-
-.song-detail-description {
-
+const SongDetailDescription = styled.div`
     margin-bottom: 1.2rem;
     align-content: flex-end;
     height: 100%;
@@ -83,20 +81,12 @@
         scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
     }
 
+`
 
 
-}
-
-@media (max-width: 600px) {
-    .song-detail {
-        padding: 1rem;
-    }
-
-    .song-detail-card {
-        padding: 1.2rem;
-    }
-
-    .song-detail h2 {
-        font-size: 1.7rem;
-    }
+export {
+    SongDetailContainer,
+    SongDetailCard,
+    BackLink,
+    SongDetailDescription
 }

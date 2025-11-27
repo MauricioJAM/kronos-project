@@ -1,5 +1,8 @@
-article {
-    display: flex;
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const SongContainer = styled.article`
+ display: flex;
     margin: 1em auto;
     align-items: center;
     background-color: #444;
@@ -13,7 +16,7 @@ article {
         width: 50px;
         height: 50px;
         border-radius: 8px;
-        border: 2px solid #F0DB4F;
+        border: 2px solid ${props => props.theme.colors.primary};
 
     }
 
@@ -29,8 +32,28 @@ article {
             gap: 0.5em;
         }
 
-        .song-link {
-            color: #F0DB4F;
+    }   
+    &:hover {
+        transform: translateY(-5px);
+        background-color: #333;
+        box-shadow: 0 5px 15px rgba(240, 219, 79, 0.2);
+    }
+
+    i {
+            color: #888;
+            font-style: normal;
+            min-width: 60px;
+            text-align: right;
+
+            @media (max-width: 722px) {
+                min-width: 50px;
+                font-size: 0.9em;
+            }
+    }
+`
+
+const SongLink = styled(Link)`
+            color: ${props => props.theme.colors.primary};
             font-size: 1em;
             margin-left: 1em;
             font-weight: 600;
@@ -50,30 +73,6 @@ article {
 
             }
 
-        }
+`
 
-
-        i {
-            color: #888;
-            font-style: normal;
-            min-width: 60px;
-            text-align: right;
-
-            @media (max-width: 722px) {
-                min-width: 50px;
-                font-size: 0.9em;
-            }
-        }
-
-
-
-    }
-
-
-    &:hover {
-        transform: translateY(-5px);
-        background-color: #333;
-        box-shadow: 0 5px 15px rgba(240, 219, 79, 0.2);
-    }
-
-}
+export { SongContainer, SongLink };
