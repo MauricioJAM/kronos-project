@@ -1,6 +1,16 @@
+import { useDispatch } from 'react-redux';
 import Song from '../Song'
 import { LibrarySection } from './styles';
-const Library = ({isOpen,toggleLibrary,library}) => {
+import { removeSong } from '../../redux/actions';
+import { useSelector } from 'react-redux';
+const Library = ({isOpen,toggleLibrary}) => {
+const dispatch = useDispatch()
+  const songs = useSelector(state => state.songs.songs)
+ 
+
+  const handleRemove = (id) =>{
+    dispatch(removeSong(id))
+  }
     return(
         <LibrarySection library= {isOpen ? 'open' : ''}>
             <div>
@@ -9,14 +19,14 @@ const Library = ({isOpen,toggleLibrary,library}) => {
             </div>
             <div>
                         {
-                            library.length === 0 ? (
+                         songs.length === 0 ? (
                                 <p>No tienes canciones en tu librería aún</p>
                             ):(
-                                library.map((song)=> {
-                                return(
-                                    <Song key={song.id} song={song} />
-                                );
-                            })
+                                songs.map(song=> (
+                                    <Song key={song.id} song={song} source="library" onRemove={ () => handleRemove(song.id)}/>
+                                )
+                            )
+                        
                     )           
                 }
                         

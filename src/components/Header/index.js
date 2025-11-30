@@ -3,7 +3,7 @@ import {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { HeaderContainer,HeaderNav, SearchForm } from './styles.js';
 
-const Header = ({query,setQuery,library}) => {
+const Header = ({query,setQuery}) => {
     const [isLibraryOpen,setIsLibraryOpen] = useState(false);
     const [artistInput, setArtistInput] = useState(query || "");
     const navigate = useNavigate();
@@ -11,8 +11,6 @@ const Header = ({query,setQuery,library}) => {
         setIsLibraryOpen(!isLibraryOpen);
 
     };
-
-    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -49,7 +47,7 @@ const Header = ({query,setQuery,library}) => {
             </HeaderNav>
         </HeaderContainer>
 
-        <Library  isOpen={isLibraryOpen} toggleLibrary={toggleLibrary} library={library}/>
+        <Library isOpen={isLibraryOpen} toggleLibrary={toggleLibrary} />
       </>
     )
 }

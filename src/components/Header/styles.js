@@ -69,6 +69,7 @@ const SearchForm = styled.form`
             border-radius: 10px;
             background-color: ${props => props.theme.colors.primary};
             margin-left: 0.5em;
+            padding:5px;
             border: 1px solid ${props => props.theme.colors.primary};
             transition: transform 0.2s ease-in-out;
             cursor: pointer;
