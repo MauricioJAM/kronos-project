@@ -1,11 +1,13 @@
 import { useDispatch } from 'react-redux';
 import Song from '../Song'
 import { LibrarySection } from './styles';
-import { removeSong } from '../../redux/actions';
 import { useSelector } from 'react-redux';
+import { removeSong, selectLibraryError, selectLibraryLoading, selectLibrarySongs } from '../../redux/state/librarySlice';
 const Library = ({isOpen,toggleLibrary}) => {
-const dispatch = useDispatch()
-  const songs = useSelector(state => state.songs.songs)
+  const dispatch = useDispatch()
+  const songs = useSelector(selectLibrarySongs)
+  const error = useSelector(selectLibraryError)
+  const loading = useSelector(selectLibraryLoading)
  
 
   const handleRemove = (id) =>{
@@ -19,15 +21,21 @@ const dispatch = useDispatch()
             </div>
             <div>
                         {
-                         songs.length === 0 ? (
+                            error ? (
+                                <p>Error al cargar tu libreria.</p>
+                            ) : loading ? (
+                                <p>Cargando...</p>
+                            ):
+                            ( 
+                                songs.length === 0 ? (
                                 <p>No tienes canciones en tu librería aún</p>
-                            ):(
-                                songs.map(song=> (
-                                    <Song key={song.id} song={song} source="library" onRemove={ () => handleRemove(song.id)}/>
+                                ):(
+                                    songs.map(song=> (
+                                        <Song key={song.id} song={song} source="library" onRemove={ () => handleRemove(song.id)}/>
+                                        )
+                                    )
                                 )
-                            )
-                        
-                    )           
+                            )   
                 }
                         
             </div>

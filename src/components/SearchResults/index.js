@@ -1,15 +1,27 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Song from '../Song';
 import { Results } from './styles';
-import { addSong } from '../../redux/actions';
+import { fetchSongs, selectLastSearch, selectSearchError, selectSearchLoading, selectSearchResults } from '../../redux/state/searchSlice';
+import { addSong, selectLibrarySongs } from '../../redux/state/librarySlice';
 
-const SearchResults = ({ songs, loading, error, onRetry }) => {
+const SearchResults = () => {
     const dispatch = useDispatch();
+    const results = useSelector(selectSearchResults)
+    const loading = useSelector(selectSearchLoading)
+    const error = useSelector(selectSearchError)
+    const lastSearch = useSelector(selectLastSearch)
+    const librarySongs = useSelector(selectLibrarySongs)
 
-    const handleAdd= (song) =>{
-        dispatch(addSong(song))
+    const handleAddToLibrary= (song) =>{
+        const exists = librarySongs.some(s => s.id === song.id)
+        if(exists){
+            alert(`${song.title} ya esta en tu librería.`)
+        }else {
+            dispatch(addSong(song))
+            alert(`${song.title} agregada a tu librería.`)
+        }
+        
     }
-
 
     return (
         <Results>
@@ -21,16 +33,15 @@ const SearchResults = ({ songs, loading, error, onRetry }) => {
                 ) : error ? (
                     <div>
                         <p>{error.message || 'Ocurrió un error'}</p>
-                        {typeof onRetry === 'function' && (
-                            <button onClick={onRetry}>Reintentar</button>
-                        )}
+                        <button onClick={()=> dispatch(fetchSongs(lastSearch))}>Reintentar</button>
+                        )
                     </div>
                 ) : (
-                    songs?.map((song) => (
+                    results?.map((song) => (
                         <Song
                             key={song.id}
                             song={song}
-                            onAdd= {() => handleAdd(song)}
+                            onAdd= {() => handleAddToLibrary(song)}
                             source="results"
                         />
                     ))

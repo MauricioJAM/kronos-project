@@ -1,12 +1,14 @@
 import Library from '../Library';
 import {useState} from 'react'
-import { useNavigate } from 'react-router-dom';
 import { HeaderContainer,HeaderNav, SearchForm } from './styles.js';
+import { clearError, fetchSongs, setLastSearch } from '../../redux/state/searchSlice.js';
+import { useDispatch } from 'react-redux';
 
-const Header = ({query,setQuery}) => {
+const Header = () => {
     const [isLibraryOpen,setIsLibraryOpen] = useState(false);
-    const [artistInput, setArtistInput] = useState(query || "");
-    const navigate = useNavigate();
+    const [artistInput, setArtistInput] = useState("");
+
+    const dispatch = useDispatch()
     const toggleLibrary = () =>{
         setIsLibraryOpen(!isLibraryOpen);
 
@@ -14,10 +16,11 @@ const Header = ({query,setQuery}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const trimmed = (artistInput || '').trim();
-        if (!trimmed) return;
-        setQuery(trimmed);
-        navigate('/');
+        if (artistInput.trim()) {
+            dispatch(clearError())
+            dispatch(setLastSearch(artistInput))
+            dispatch(fetchSongs(artistInput))
+        }
     }
 
     return(
@@ -42,8 +45,7 @@ const Header = ({query,setQuery}) => {
                         onChange={(e) => setArtistInput(e.target.value)}
                         />
                     <button type="submit">Buscar</button>
-                        
-                </SearchForm>
+                 </SearchForm>
             </HeaderNav>
         </HeaderContainer>
 
