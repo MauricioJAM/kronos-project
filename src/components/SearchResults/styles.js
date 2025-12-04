@@ -4,6 +4,8 @@ const Results = styled.section`
     width: 55%;
     padding: 2em 4em 1em;
     margin: 0 auto;
+    justify-content: center;
+    height: auto;
 
     @media(max-width:722px) {
         width: 90%;
@@ -19,6 +21,7 @@ const Results = styled.section`
         width: 100%;
         justify-content: center;
         align-content: center;
+        
     }
 `
 export { Results };

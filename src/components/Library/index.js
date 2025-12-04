@@ -3,6 +3,7 @@ import Song from '../Song'
 import { LibrarySection } from './styles';
 import { useSelector } from 'react-redux';
 import { removeSong, selectLibraryError, selectLibraryLoading, selectLibrarySongs } from '../../redux/state/librarySlice';
+import { Loader } from '../Loader';
 const Library = ({isOpen,toggleLibrary}) => {
   const dispatch = useDispatch()
   const songs = useSelector(selectLibrarySongs)
@@ -24,7 +25,7 @@ const Library = ({isOpen,toggleLibrary}) => {
                             error ? (
                                 <p>Error al cargar tu libreria.</p>
                             ) : loading ? (
-                                <p>Cargando...</p>
+                                <Loader/>
                             ):
                             ( 
                                 songs.length === 0 ? (

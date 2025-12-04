@@ -1,26 +1,52 @@
 import { useEffect, useState } from 'react';
-import { Link , useLocation} from 'react-router-dom';
+import { Link , useParams} from 'react-router-dom';
 import axios from 'axios';
 import { BackLink, SongDetailContainer ,SongDetailDescription, SongDetailCard} from './styles';
+import { Loader } from '../Loader';
 
 
 const SongDetail = () => {
+  const {id} = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-  const {state} = useLocation();
-  const songId = state?.id;
+  
   useEffect(() => {
-    if (!songId) return;
-    setLoading(true);
-    setError(null);
-    axios.get(`/api/song/${encodeURIComponent(songId)}`)
-      .then((res) => setData(res.data))
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false));
-  }, [songId]);
+  const fetchSongsDetails = async () => {
+    if (!id) {
+      setError("Id no encontrado");
+      setLoading(false);
+      return;
+    }
 
-  if (loading) return <SongDetailContainer><p>Cargando detalles...</p></SongDetailContainer>;
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await axios.get(
+        `http://localhost:4000/api/song/${encodeURIComponent(id)}`
+      );
+
+      if (response.data.error) {
+        throw new Error(response.data.error);
+      }
+
+      setData(response.data);
+
+    } catch (err) {
+      const msg = err?.message || "Error desconocido en petición";
+      setError(msg);
+
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchSongsDetails();
+}, [id]);
+
+
+  if (loading) return <SongDetailContainer><Loader/></SongDetailContainer>;
   if (error) return (
     <SongDetailContainer>
       <p>Error: {error.message || 'Ocurrió un error'}</p>

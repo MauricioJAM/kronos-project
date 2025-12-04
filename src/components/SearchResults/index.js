@@ -3,6 +3,7 @@ import Song from '../Song';
 import { Results } from './styles';
 import { fetchSongs, selectLastSearch, selectSearchError, selectSearchLoading, selectSearchResults } from '../../redux/state/searchSlice';
 import { addSong, selectLibrarySongs } from '../../redux/state/librarySlice';
+import { Loader } from '../Loader';
 
 const SearchResults = () => {
     const dispatch = useDispatch();
@@ -29,12 +30,12 @@ const SearchResults = () => {
 
             <div>
                 {loading ? (
-                    <p>Loading...</p>
+                    <Loader/>
                 ) : error ? (
                     <div>
                         <p>{error.message || 'Ocurrió un error'}</p>
                         <button onClick={()=> dispatch(fetchSongs(lastSearch))}>Reintentar</button>
-                        )
+                        
                     </div>
                 ) : (
                     results?.map((song) => (

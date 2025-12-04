@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import Theme from '../../theme/index';
 import GlobalStyles from '../../theme/GlobalStyles';
 import { AppContainer } from './styles';
+import { Loader } from '../Loader';
 
 const SearchResults = lazy(() => import('../SearchResults'));
 const SongDetail = lazy(() => import('../SongDetail'));
@@ -21,7 +22,11 @@ function App() {
       <AppContainer>
         <Header />
 
-        <Suspense fallback={<div style={{ color: "#f0db4f",marginTop:'1em',textAlign:"center" }}>Cargando…</div>}>
+        <Suspense fallback={<div style={{display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",     
+        width: "100%",  }}><Loader/></div>}>
 
           <Routes>
             <Route 
@@ -33,7 +38,7 @@ function App() {
               } 
             />
 
-            <Route path="/song" element={<SongDetail />} />
+            <Route path="/song/:id" element={<SongDetail />} />
           </Routes>
 
         </Suspense>
